@@ -3,7 +3,7 @@
 
 
 const dropdowns=document.querySelectorAll(".dropdown select");// selecting all selectin class dropdown
-const btn=document.querySelector("button");
+const btn=document.querySelector(" form button");
 const fromCurr=document.querySelector(".from select");
 
 const toCurr=document.querySelector(".to select");
@@ -28,7 +28,7 @@ for(let select of dropdowns){
     }
     select.addEventListener("change",(event)=>{
         udpdateFlag(event.target);
-    })
+    });
     
 }
 
@@ -58,7 +58,7 @@ const exchangeRate=async()=>{
     let finalAmount = amountvalue * rate;
     message.innerText = `${amountvalue} ${fromCurr.value} = ${finalAmount} ${toCurr.value}`;
 
-}
+};
 
 // to change flag on selecting currency code
 
@@ -69,16 +69,28 @@ let countryCode= countryList[Ccode];
 let newSrc=`https://flagsapi.com/${countryCode}/flat/64.png`;
 let img=element.parentElement.querySelector("img");
 img.src=newSrc;
-}
+};
+    // onclick of button the exchange rate should change
+    btn.addEventListener("click",(e)=>{
+        e.preventDefault();// to prevent page refresh
+        exchangeRate();
+    });
+    
 // when the page load for first time function get call
 
 window.addEventListener("load",()=>{
     exchangeRate();
-})
+});
 
 
-    // onclick of button the exchange rate should change
-btn.addEventListener("click",(e)=>{
-    e.preventDefault();// to prevent page refresh
-    exchangeRate();
+
+
+// toggle icon
+const navToggle = document.querySelector('.nav-toggle');
+const navContainer = document.querySelector('.nav-container');
+const navLinks = document.querySelector('.nav-links');
+
+navToggle.addEventListener('click', () => {
+  navContainer.classList.toggle('active');
+  navLinks.classList.toggle('active');
 });
